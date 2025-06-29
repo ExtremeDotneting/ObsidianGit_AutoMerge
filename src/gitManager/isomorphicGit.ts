@@ -6,6 +6,7 @@ import type {
     GitHttpResponse,
     GitProgressEvent,
     HttpClient,
+    MergeDriverParams,
     Walker,
     WalkerMap,
 } from "isomorphic-git";
@@ -425,6 +426,7 @@ export class IsomorphicGit extends GitManager {
 
             let isUsedMergeDriver = false;
             let mergedFilesPaths: string[] = [];
+            let mergedFilesParams: MergeDriverParams[] = [];
             const mergeRes = await this.wrapFS(
                 git.merge({
                     ...this.getRepo(),
@@ -436,6 +438,7 @@ export class IsomorphicGit extends GitManager {
                         let contents = mdArgs.contents;
                         let path = mdArgs.path;
                         console.log(mdArgs);
+                        mergedFilesParams.push(mdArgs);
                         mergedFilesPaths.push(path);
                         isUsedMergeDriver = true;
 
@@ -457,6 +460,27 @@ export class IsomorphicGit extends GitManager {
                 mergeRes.alreadyMerged = true;
                 const mergedFilesPathsJson = JSON.stringify(mergedFilesPaths, null, 2);
                 this.plugin.displayMessage("Merged files by OURS.\n" + mergedFilesPathsJson);
+
+
+                // 💾 Сохраняем файлы в GitConflicts
+                const now = window.moment().format("YYYY-MM-DD_HH-mm-ss");
+                const conflictDir = `⛔️GitConflicts/${now}`;
+                const vault = this.plugin.app.vault;
+                
+                await vault.adapter.mkdir(conflictDir).catch(() => {});
+                
+                for (const { path, contents } of mergedFilesParams) {
+                    const basePath = `${conflictDir}/(BASE)${path}`;
+                    const localPath = `${conflictDir}/(LOCAL)${path}`;
+                    const remotePath = `${conflictDir}/(REMOTE)${path}`;
+                    try {
+                        await vault.adapter.write(basePath, contents[0]); // base
+                        await vault.adapter.write(localPath, contents[1]); // ours
+                        await vault.adapter.write(remotePath, contents[2]); // theirs
+                    } catch (e) {
+                        console.warn("Failed to save conflict file", path, e);
+                    }
+                }
             }
 
             if (!mergeRes.alreadyMerged) {

@@ -3,7 +3,7 @@
     "authorUrl": "https://github.com/Vinzent03",
     "id": "obsidian-git-fork",
     "name": "Git(Fork)",
-    "description": "Integrate Git version control with automatic backup and other advanced features.",
+    "description": "Fork of Vinzent03 plugin, adds automatic conflicts resolving.",
     "isDesktopOnly": false,
     "fundingUrl": "https://ko-fi.com/vinzent",
     "version": "2.34.0"
