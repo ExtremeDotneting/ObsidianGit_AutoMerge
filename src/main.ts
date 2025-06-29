@@ -146,6 +146,7 @@ export default class ObsidianGit extends Plugin {
         );
 
         pluginRef.plugin = this;
+        (window as any).obsidianGitFork = this;
 
         this.localStorage.migrate();
         await this.loadSettings();
@@ -522,7 +523,7 @@ export default class ObsidianGit extends Plugin {
     }
 
     get useSimpleGit(): boolean {
-        return Platform.isDesktopApp;
+        return /*Platform.isDesktopApp*/false;
     }
 
     async init({ fromReload = false }): Promise<void> {
@@ -560,7 +561,7 @@ export default class ObsidianGit extends Plugin {
                     this.setPluginState({ gitAction: CurrentGitAction.idle });
 
                     if (
-                        Platform.isDesktop &&
+                        /*Platform.isDesktop*/false &&
                         this.settings.showBranchStatusBar &&
                         !this.branchBar
                     ) {

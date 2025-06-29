@@ -113,7 +113,7 @@ export default class Tools {
         event?: MouseEvent;
     }) {
         let diffStyle = this.plugin.settings.diffStyle;
-        if (Platform.isMobileApp) {
+        if (/*Platform.isMobileApp*/true) {
             diffStyle = "git_unified";
         }
 

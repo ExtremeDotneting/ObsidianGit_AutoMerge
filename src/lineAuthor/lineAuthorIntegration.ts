@@ -88,7 +88,7 @@ export class LineAuthoringFeature {
         gitManager: SimpleGit;
     } {
         return {
-            available: this.plg.useSimpleGit && Platform.isDesktopApp,
+            available: this.plg.useSimpleGit && /*Platform.isDesktopApp*/false,
             gitManager:
                 this.plg.gitManager instanceof SimpleGit
                     ? this.plg.gitManager

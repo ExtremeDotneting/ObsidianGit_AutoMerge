@@ -1,8 +1,8 @@
 {
-    "author": "Vinzent",
+    "author": "ExtremeDotneting",
     "authorUrl": "https://github.com/Vinzent03",
-    "id": "obsidian-git",
-    "name": "Git",
+    "id": "obsidian-git-fork",
+    "name": "Git(Fork)",
     "description": "Integrate Git version control with automatic backup and other advanced features.",
     "isDesktopOnly": false,
     "fundingUrl": "https://ko-fi.com/vinzent",

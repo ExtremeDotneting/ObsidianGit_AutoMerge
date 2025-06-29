@@ -27,6 +27,8 @@ import type {
 } from "../types";
 import { CurrentGitAction, NoNetworkError } from "../types";
 import { impossibleBranch, spawnAsync, splitRemoteBranch } from "../utils";
+
+
 import { GitManager } from "./gitManager";
 
 export class SimpleGit extends GitManager {
@@ -380,7 +382,7 @@ export class SimpleGit extends GitManager {
 
             this.git.subModule(["foreach", "--recursive", ""]).then(
                 () => {
-                    this.git.outputHandler(() => {});
+                    this.git.outputHandler(() => { });
                 },
                 (e) => this.plugin.displayError(e)
             );
@@ -1136,7 +1138,7 @@ function parseBlame(blameOutputUnnormalized: string): Blame {
     };
 
     let line = 1;
-    for (let bi = 0; bi < blameLines.length; ) {
+    for (let bi = 0; bi < blameLines.length;) {
         if (startsWithNonWhitespace(blameLines[bi])) {
             const lineInfo = blameLines[bi].split(" ");
 

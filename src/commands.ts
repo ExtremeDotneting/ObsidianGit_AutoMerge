@@ -216,7 +216,7 @@ export function addCommmands(plugin: ObsidianGit) {
             }),
     });
 
-    if (Platform.isDesktopApp) {
+    if (/*Platform.isDesktopApp*/false) {
         plugin.addCommand({
             id: "commit-amend-staged-specified-message",
             name: "Amend staged",

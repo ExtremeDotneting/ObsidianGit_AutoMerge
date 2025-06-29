@@ -895,7 +895,7 @@ export class ObsidianGitSettingsTab extends PluginSettingTab {
             );
         };
 
-        if (Platform.isDesktopApp) {
+        if (/*Platform.isDesktopApp*/false) {
             const info = containerEl.createDiv();
             info.setAttr("align", "center");
             info.setText(

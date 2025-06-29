@@ -102,6 +102,7 @@ export class MyAdapter {
         } else {
             formattedAll = all;
         }
+        //console.log(formattedAll);
         return formattedAll;
     }
     async mkdir(path: string) {

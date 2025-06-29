@@ -26,6 +26,8 @@ import { splitRemoteBranch, worthWalking } from "../utils";
 import { GitManager } from "./gitManager";
 import { MyAdapter } from "./myAdapter";
 
+(window as any).isoGit = git;
+
 export class IsomorphicGit extends GitManager {
     private readonly FILE = 0;
     private readonly HEAD = 1;
@@ -271,15 +273,15 @@ export class IsomorphicGit extends GitManager {
                     status.changed.map((file) =>
                         file.workingDir !== "D"
                             ? this.wrapFS(
-                                  git.add({
-                                      ...this.getRepo(),
-                                      filepath: file.path,
-                                  })
-                              )
+                                git.add({
+                                    ...this.getRepo(),
+                                    filepath: file.path,
+                                })
+                            )
                             : git.remove({
-                                  ...this.getRepo(),
-                                  filepath: file.path,
-                              })
+                                ...this.getRepo(),
+                                filepath: file.path,
+                            })
                     )
                 );
             } else {
@@ -290,8 +292,8 @@ export class IsomorphicGit extends GitManager {
                         deleted
                             ? git.remove({ ...this.getRepo(), filepath: path })
                             : this.wrapFS(
-                                  git.add({ ...this.getRepo(), filepath: path })
-                              )
+                                git.add({ ...this.getRepo(), filepath: path })
+                            )
                     )
                 );
             }

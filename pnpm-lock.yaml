@@ -45,8 +45,8 @@ importers:
         specifier: ^3.4.48
         version: 3.4.48
       isomorphic-git:
-        specifier: ^1.27.1
-        version: 1.27.1
+        specifier: ^1.32.0
+        version: 1.32.0
       js-sha256:
         specifier: ^0.9.0
         version: 0.9.0
@@ -1268,9 +1268,9 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  isomorphic-git@1.27.1:
-    resolution: {integrity: sha512-X32ph5zIWfT75QAqW2l3JCIqnx9/GWd17bRRehmn3qmWc34OYbSXY6Cxv0o9bIIY+CWugoN4nQFHNA+2uYf2nA==}
-    engines: {node: '>=12'}
+  isomorphic-git@1.32.0:
+    resolution: {integrity: sha512-opbs9B00JcXZRmCFB8oxCIKsmshtfmWh89lHu+2qZZFF6599KNn3aRuhsDlA1YiAtvZXK85LW6MCLPxmNhGIAw==}
+    engines: {node: '>=14.17'}
     hasBin: true
 
   js-sha256@0.9.0:
@@ -1537,6 +1537,9 @@ packages:
   parse-json@5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
     engines: {node: '>=8'}
+
+  path-browserify@1.0.1:
+    resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
 
   path-exists@3.0.0:
     resolution: {integrity: sha512-bpC7GYwiDYQ4wYLe+FA8lhRjhQCMcQGuSgGGqDkg/QerRWw9CmGRT0iSOVRSZJ29NMLZgIzqaljJ63oaL4NIJQ==}
@@ -3252,7 +3255,7 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  isomorphic-git@1.27.1:
+  isomorphic-git@1.32.0:
     dependencies:
       async-lock: 1.4.1
       clean-git-ref: 2.0.1
@@ -3261,6 +3264,7 @@ snapshots:
       ignore: 5.3.2
       minimisted: 2.0.1
       pako: 1.0.11
+      path-browserify: 1.0.1
       pify: 4.0.1
       readable-stream: 3.6.2
       sha.js: 2.4.11
@@ -3524,6 +3528,8 @@ snapshots:
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
+
+  path-browserify@1.0.1: {}
 
   path-exists@3.0.0: {}
 
