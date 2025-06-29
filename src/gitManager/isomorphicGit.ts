@@ -423,14 +423,42 @@ export class IsomorphicGit extends GitManager {
 
             await this.checkAuthorInfo();
 
+            let isUsedMergeDriver = false;
+            let mergedFilesPaths: string[] = [];
             const mergeRes = await this.wrapFS(
                 git.merge({
                     ...this.getRepo(),
                     ours: branchInfo.current,
                     theirs: branchInfo.tracking!,
                     abortOnConflict: false,
+                    mergeDriver: async (mdArgs) => {
+                        let branches = mdArgs.branches;
+                        let contents = mdArgs.contents;
+                        let path = mdArgs.path;
+                        console.log(mdArgs);
+                        mergedFilesPaths.push(path);
+                        isUsedMergeDriver = true;
+
+                        //Автоматически выбираем ours
+                        return {
+                            cleanMerge: true,
+                            /*
+                                0 - base
+                                1 - ours
+                                2 - remote
+                            */
+                            mergedText: contents[1], // всегда выбираем `ours`
+                        };
+                    },
                 })
             );
+
+            if (isUsedMergeDriver) {
+                mergeRes.alreadyMerged = true;
+                const mergedFilesPathsJson = JSON.stringify(mergedFilesPaths, null, 2);
+                this.plugin.displayMessage("Merged files by OURS.\n" + mergedFilesPathsJson);
+            }
+
             if (!mergeRes.alreadyMerged) {
                 await this.wrapFS(
                     git.checkout({
